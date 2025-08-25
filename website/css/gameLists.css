@@ -1,0 +1,105 @@
+.dashbord-tables{
+    animation: transitionIn-Y-over 0.5s;
+}
+.filter-container{
+    animation: transitionIn-Y-bottom  0.5s;
+}
+.sub-table,.anime{
+    animation: transitionIn-Y-bottom 0.5s;
+}
+.favorite-icon{
+    animation: transitionIn-Y-bottom 0.5s;
+}
+
+.center-content {
+    text-align: center;
+}
+
+/* Button Styling */
+.play-now-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #4CAF50; /* Green */
+    color: #fff;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.play-now-btn:hover {
+    background-color: #43A047; /* Slightly darker green */
+    transform: scale(1.05);
+}
+
+/* Active Effect (When Clicked) */
+.play-now-btn:active {
+    background-color: #388E3C; /* Even darker green */
+    transform: scale(0.95);
+}
+
+/* Focus Effect (For Accessibility) */
+.play-now-btn:focus {
+    outline: 2px solid #81C784; /* Light green border */
+}
+
+
+/* favorite */
+.favorite-icon {
+    position: absolute;
+    top: 5px;
+    left: 45px;
+    font-size: 24px; /* Adjust size */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    z-index: 10; /* Ensures the heart is on top */
+    user-select: none; /* Prevent text selection */
+}
+
+.favorite-icon:hover {
+    transform: scale(1.2);
+}
+
+.game-container {
+    position: relative;
+    display: flex; /* Ensure proper layout */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensure full width */
+}
+
+.disabled-btn {
+    background-color: rgb(101, 101, 101) !important;
+    pointer-events: none; /* Cannot click */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.button-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    bottom: 125%; /* show above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    width: 200px;
+    z-index: 1;
+}
+
+.button-wrapper:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,225 @@
+import asyncio
+import requests
+from fastapi import FastAPI
+from pydantic import BaseModel
+from langchain_core.prompts import PromptTemplate
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
+import re
+from fastapi.middleware.cors import CORSMiddleware
+
+from nlp_suicidal.detect_suicidal import SuicideDetector
+
+# Initialize the detector
+detector = SuicideDetector()
+
+
+app = FastAPI()
+
+
+# Allow all origins for development (change "*" to specific domains in production)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or ["http://localhost:8080"] if your frontend is on a different port
+    allow_credentials=True,
+    allow_methods=["*"],  # This allows OPTIONS, POST, GET, etc.
+    allow_headers=["*"],
+)
+
+DB_FAISS_PATH = "vectorstores/db_faiss"
+
+API_KEY = ""
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+
+
+
+
+class ChatRequest(BaseModel):
+    message: str
+    memory: str   # This will contain the memory data
+
+
+async def query_openrouter(prompt: str):
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+    }
+    data = {
+        "model": "google/gemini-2.0-flash-exp:free",
+        "messages": [{"role": "user", "content": prompt}],
+    #     "temperature": 0.7,  # Makes responses more creative & human-like
+    # "top_p": 0.9,  # Keeps it relevant
+    # "max_tokens": 120  # Keeps responses concise
+    }
+    response = requests.post(API_URL, json=data, headers=headers)
+    
+    if response.status_code == 200:
+        try:
+            return response.json()["choices"][0]["message"]["content"]
+        except KeyError:
+            return "Error: Unexpected response format from API."
+    else:
+        return f"Error: {response.status_code}, {response.text}"
+
+async def load_retriever():
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2",
+        model_kwargs={"device": "cpu"},
+    )
+    # return FAISS.load_local(DB_FAISS_PATH, embeddings)
+    return FAISS.load_local(DB_FAISS_PATH, embeddings, allow_dangerous_deserialization=True)
+
+retriever = None
+
+@app.on_event("startup")
+async def startup_event():
+    global retriever
+    retriever = await load_retriever()
+
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    global retriever
+    if retriever is None:
+        return {"error": "Retriever not initialized"}
+
+    # Get relevant context from vector store
+    # docs = retriever.similarity_search(request.message, k=2)
+    # context = "\n".join([doc.page_content for doc in docs])
+
+    print("🟢 Received Chat Request:")
+    print(f"Message: {request.message}")
+    print(f"Memory: {request.memory}")
+    
+    # Build the prompt with memory included
+    prompt_template = """You're a warm, friendly, and caring companion who genuinely listens and supports the user.  
+    Your tone is natural, conversational, and encouraging—just like a close friend chatting.  
+
+    Here's some context from previous journals and conversations to help you understand the user better:  
+    {memory}  
+
+    ### **Important Instruction:**  
+    You **must** ask at least **one engaging follow-up question** in every response.  
+    - If the user shares an emotion, **acknowledge it** and ask them to elaborate.  
+    - If they mention an event, **ask about details or feelings** related to it.  
+    - If they previously shared a struggle (based on the journals and conversations above), **check in on how it turned out**.  
+
+    Your response should be **short, engaging, and emotionally supportive**.  
+    Make sure to **always include a follow-up question** related to **past events or emotions**.  
+
+    Patient: {question}  
+    """
+
+    
+    prompt = prompt_template.format(
+        memory=request.memory,
+        question=request.message
+    )
+
+    print("\n🟢 Final Generated Prompt:")
+    print(prompt)
+
+    
+    answer = await query_openrouter(prompt)
+
+    print("\n🟢 OpenRouter Response:")
+    print(answer)
+
+    # Analyze single text
+    suicidal_result = detector.analyze_text(request.message)
+
+    print("\n🟢 Suicide Detection Result:")
+    print(suicidal_result)
+
+    return {
+        "response": answer,
+        "user_message": request.message,
+        "is_suicidal": suicidal_result['is_suicidal'],
+        "confidence": suicidal_result['confidence'],
+    }
+
+
+
+@app.post("/summarise")
+async def summarise(request: ChatRequest):
+    """
+    This endpoint receives the conversation text, builds a prompt instructing the model to summarize
+    it concisely and empathetically, and returns the generated summary.
+    """
+    conversation_text = request.message
+
+    # Build a custom summarization prompt using the conversation text.
+    summarization_prompt = (
+        "Summarize the following conversation between the patient (user) and the medical chatbot as a concise journal entry. "
+        "Focus on capturing the patient's feelings, concerns, and the key points of the discussion in a compassionate tone. "
+        "Do not include any extraneous text, introductory phrases, or commentary. Your response should start directly with the summary.\n\n"
+        f"{conversation_text}\n\nSummary:"
+    )
+
+    # Call your existing model API via query_openrouter with the custom summarization prompt.
+    summary = await query_openrouter(summarization_prompt)
+    return {"summary": summary}
+
+
+
+
+# 🚀 New Endpoint for Chat Analysis
+@app.post("/analyze_chat_report")
+async def analyze_chat_report(request: ChatRequest):
+
+    conversation_text = request.message
+
+    analysis_prompt = (
+    f"Conversation:\n{conversation_text}\n\n"
+    "Analyze the conversation and generate a mental health assessment with scores between 1-100. "
+    "Return the response strictly without markdown formatting or extra characters (MUST BE IN RAW TEXT). "
+    '"overall_score": (1-100)\n'
+    '"sentiment_score": (1-100)\n'
+    '"stress_level": (1-100)\n'
+    '"anxiety_level": (1-100)\n'
+    '"depression_risk": (1-100)\n'
+    '"overall_score_reason": "Brief explanation of the overall score."\n'
+    '"sentiment_score_reason": "Brief explanation of the sentiment score."\n'
+    '"stress_level_reason": "Brief explanation of the stress level."\n'
+    '"anxiety_level_reason": "Brief explanation of the anxiety level."\n'
+    '"depression_risk_reason": "Brief explanation of the depression risk."\n'
+)
+
+
+    report = await query_openrouter(analysis_prompt)
+    
+    return {"report": report}
+
+
+
+
+@app.post("/journal_feedback")
+async def journal_feedback(request: ChatRequest):
+    """
+    This endpoint receives the original AI-generated summary and the user's feedback,
+    and asks the AI to regenerate a more accurate journal entry based on that feedback.
+    """
+    journal_content = request.memory.strip()
+    user_feedback = request.message.strip()
+
+    # Build the prompt
+    refinement_prompt = (
+        "You are a mental health chatbot that creates empathetic, clear, and emotionally intelligent journal summaries. "
+        "Below is the original summary you previously generated, followed by the user's feedback pointing out what was missing or inaccurate.\n\n"
+        f"Original Summary:\n{journal_content}\n\n"
+        f"User Feedback:\n{user_feedback}\n\n"
+        "Please rewrite the journal entry to better reflect the user's original experience and concerns. "
+        "Make sure to keep the tone compassionate and include important details the user felt were missing. "
+        "Return the response strictly without markdown formatting or extra characters (MUST BE IN RAW TEXT)."
+        '"refined_journal":'
+    )
+
+    # Get the improved summary
+    refined_journal = await query_openrouter(refinement_prompt)
+
+    print("Generated prompt refine journal: ")
+    print(refined_journal)
+
+    
+
+    return {"refined_journal": refined_journal}

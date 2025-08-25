@@ -1,0 +1,101 @@
+-- Auto-delete old game records after 2 weeks
+CREATE EVENT autoClearOldGames
+ON SCHEDULE EVERY 1 DAY
+DO
+  DELETE FROM gamePlay WHERE playDate < NOW() - INTERVAL 14 DAY;
+
+
+DROP EVENT IF EXISTS `autoClearOldGames`; CREATE DEFINER=`root`@`localhost` EVENT `autoClearOldGames` ON SCHEDULE EVERY 1 DAY STARTS '2025-03-19 23:35:41' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM gamePlay WHERE playDate < NOW() - INTERVAL 30 DAY
+
+
+
+If you need to disable the auto-delete temporarily:
+  ALTER EVENT autoClearOldGames DISABLE;
+  ALTER EVENT autoClearOldGames ENABLE;
+
+To Delete Auto delete
+DROP EVENT IF EXISTS autoClearOldGames;
+
+
+
+-- Table for listing all games with individual status
+CREATE TABLE gameList (
+    gameId INT PRIMARY KEY AUTO_INCREMENT,
+    gameName VARCHAR(50) UNIQUE NOT NULL,
+    status BOOLEAN NOT NULL DEFAULT TRUE -- TRUE = Enabled, FALSE = Disabled
+);
+
+-- Store game sessions (linked to webuser)
+CREATE TABLE gamePlay (
+    playId INT PRIMARY KEY AUTO_INCREMENT,
+    userEmail VARCHAR(100) NOT NULL, -- User identifier (from webuser) 
+    gameId INT NOT NULL,
+    playDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (gameId) REFERENCES gameList(gameId) ON DELETE CASCADE
+);
+
+-- Memory Matching Game Data
+CREATE TABLE memoryGame (
+    playId INT PRIMARY KEY,
+    timeOpen INT NOT NULL, 
+    timeUsed DECIMAL(5,2) NOT NULL, 
+    finalScore INT NOT NULL,
+    FOREIGN KEY (playId) REFERENCES gamePlay(playId) ON DELETE CASCADE
+);
+
+-- Mindful Counting Game Data
+CREATE TABLE mindfulCounting (
+    playId INT PRIMARY KEY,
+    difficultyLevel ENUM('easy', 'medium', 'hard', 'extreme') NOT NULL,
+    score INT NOT NULL,
+    timeUsed DECIMAL(5,2) NOT NULL,
+    FOREIGN KEY (playId) REFERENCES gamePlay(playId) ON DELETE CASCADE
+);
+
+-- Quiz Game Data
+CREATE TABLE quizGame (
+    playId INT PRIMARY KEY,
+    timeUsed DECIMAL(5,2) NOT NULL,
+    percentageScore DECIMAL(5,2) NOT NULL,
+    finalScore INT NOT NULL,
+    FOREIGN KEY (playId) REFERENCES gamePlay(playId) ON DELETE CASCADE
+);
+
+-- Spaceship Shooter Game Data
+CREATE TABLE spaceshipShooter (
+    playId INT PRIMARY KEY,
+    enemiesDestroyed INT NOT NULL, -- Number of enemies destroyed
+    bulletsFired INT NOT NULL, -- Total bullets fired
+    accuracy DECIMAL(5,2) NOT NULL, -- Accuracy percentage
+    survivalTime DECIMAL(5,2) NOT NULL, -- Time survived in seconds
+    finalScore INT NOT NULL,
+    FOREIGN KEY (playId) REFERENCES gamePlay(playId) ON DELETE CASCADE
+);
+
+-- Bingo Missions
+CREATE TABLE bingoMission (
+    missionNumber INT PRIMARY KEY CHECK(missionNumber BETWEEN 1 AND 9),
+    missionName VARCHAR(100) NOT NULL, 
+    missionDescription TEXT NOT NULL,
+    missionType ENUM('playGame', 'scoreTarget', 'timeLimit', 'winGame', 'other') NOT NULL,
+    targetValue INT NOT NULL,
+    rewardPoints INT NOT NULL
+);
+
+-- Bingo Progress
+CREATE TABLE bingoProgress (
+    userEmail VARCHAR(100) NOT NULL, -- User identifier
+    missionNumber INT NOT NULL CHECK(missionNumber BETWEEN 1 AND 9),
+    playId INT NOT NULL,
+    rewardStatus ENUM('unclaimed', 'claimed') NOT NULL DEFAULT 'unclaimed', 
+    claimDate DATETIME DEFAULT NULL,
+    PRIMARY KEY (userEmail, missionNumber),
+    FOREIGN KEY (playId) REFERENCES gamePlay(playId) ON DELETE CASCADE
+);
+
+-- Auto-delete old game records after 2 weeks
+CREATE EVENT autoClearOldGames
+ON SCHEDULE EVERY 1 DAY
+DO
+  DELETE FROM gamePlay WHERE playDate < NOW() - INTERVAL 14 DAY;
+

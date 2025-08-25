@@ -1,0 +1,320 @@
+/* Main Layout & Color Scheme */
+:root {
+    --primary: #2b84ea;
+    --primary-light: #e9f2ff;
+    --secondary: #47c98d;
+    --text-dark: #333;
+    --text-muted: #666;
+    --border-color: #eaeaea;
+    --light-bg: #f8fbff;
+    --success: #d4edda;
+    --success-text: #155724;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Calendar Container */
+  .calendar-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  /* Navigation Controls */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .nav-buttons a {
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .nav-buttons a:hover {
+    background-color: #1a6dc7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  }
+  
+  /* Month-Year Title */
+  .month-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary);
+    margin: 10px 0 20px;
+  }
+  
+  /* Month-Year Form */
+  .month-year-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .month-year-form select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+  }
+  
+  .month-year-form button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .month-year-form button:hover {
+    background-color: #1a6dc7;
+  }
+  
+  /* Calendar Table */
+  .calendar-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin-bottom: 30px;
+  }
+  
+  .calendar-table th {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+  
+  .calendar-table td {
+    width: 14.28%;
+    height: 80px;
+    vertical-align: top;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 5px;
+    position: relative;
+    transition: background-color 0.2s;
+  }
+  
+  .calendar-table td:hover {
+    background-color: var(--primary-light);
+  }
+  
+  /* Day and Mood Display */
+  .day-mood {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+  }
+  
+  .day-mood strong {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .mood-emoji {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  
+  /* Today's Mood Section */
+  .today-mood {
+    background-color: var(--primary-light);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .today-mood p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  /* Mood Selection Buttons */
+  .mood-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  
+  .mood-button {
+    background-color: white;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dark);
+  }
+  
+  .mood-button:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Success Message Popup */
+  #success-popup {
+    animation: fadeOut 0.5s ease-in-out 1.5s forwards;
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  /* Analytics Report Button */
+  a.mood-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 14px 24px;
+  }
+  
+  a.mood-button:hover {
+    background-color: #3ab77b;
+  }
+  
+  /* Make it responsive */
+  @media (max-width: 768px) {
+    .calendar-container {
+      padding: 15px 10px;
+      margin: 10px;
+    }
+    
+    .calendar-table td {
+      height: 60px;
+    }
+    
+    .mood-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .mood-button {
+      width: 80%;
+    }
+  }
+  
+  /* Today's date highlight */
+  .calendar-table td.today {
+    background-color: #ffffdd;
+    border: 2px solid var(--primary);
+  }
+  
+  /* Different mood states */
+  .mood-Happy { background-color: #e8f5e9; }
+  .mood-Neutral { background-color: #f5f5f5; }
+  .mood-Stress { background-color: #fff3e0; }
+  .mood-Sad { background-color: #e3f2fd; }
+  .mood-Grateful { background-color: #f3e5f5; }
+
+  /* Monthly stats section */
+  .monthly-stats {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .stat-card {
+    background-color: var(--primary-light);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .stat-card h3 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 16px;
+  }
+  
+  .stat-card p {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 5px 0;
+  }
+  
+  .progress-bar-container {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    height: 10px;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    background-color: var(--secondary);
+  }
+
+  /* Empty state message */
+  .empty-state {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+  }
+
+  /* Tooltip styles */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

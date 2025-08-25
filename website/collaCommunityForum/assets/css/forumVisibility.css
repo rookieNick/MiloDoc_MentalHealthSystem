@@ -1,0 +1,170 @@
+/* Forum visibility styles for non-members */
+
+/* Base blur container */
+.blur-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Blur effect for non-members on public forums */
+  .forum-posts.public-forum-nonmember li.post-item:nth-child(n+4) {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  /* Join message overlay for public forums */
+  .forum-posts.public-forum-nonmember::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,1) 100%);
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .join-message {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .join-message h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .join-message p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  .join-message .join-forum-btn {
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .join-message .join-forum-btn:hover {
+    background-color: #3a5fc4;
+  }
+  
+  /* Private/Anonymous Forum Styling */
+  .forum-posts.private-forum-nonmember {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fc;
+    border-radius: 8px;
+    border: 1px solid #eaecf4;
+  }
+  
+  .private-forum-message {
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+  }
+  
+  .private-forum-message .lock-icon {
+    font-size: 48px;
+    color: #d1d3e2;
+    margin-bottom: 20px;
+  }
+  
+  .private-forum-message h3 {
+    font-size: 24px;
+    color: #4e73df;
+    margin-bottom: 10px;
+  }
+  
+  .private-forum-message p {
+    font-size: 16px;
+    color: #858796;
+    max-width: 500px;
+    margin: 0 auto 20px auto;
+  }
+  
+  .private-forum-message .request-access-btn {
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .private-forum-message .request-access-btn:hover {
+    background-color: #3a5fc4;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .join-message h3 {
+      font-size: 18px;
+    }
+    
+    .join-message p {
+      font-size: 14px;
+    }
+    
+    .join-message .join-forum-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+    
+    .private-forum-message .lock-icon {
+      font-size: 36px;
+    }
+    
+    .private-forum-message h3 {
+      font-size: 20px;
+    }
+    
+    .private-forum-message p {
+      font-size: 14px;
+    }
+  }
+
+  /* Styling for disabled buttons for non-members */
+.non-member-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* Add tooltip for non-member buttons */
+  .non-member-btn:hover::after {
+    content: "Join to interact";
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    z-index: 100;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }

@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-Repeat: "no-repeat";  
+    background-Position: "center";  
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    transform: scale(1.25);
+    transform-origin: top center;
+}
+
+.question-box {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.option {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #bbb;
+}
+
+.selected {
+    background: green !important;
+    color: white;
+}
+
+#next-btn { 
+    padding: 10px 15px; 
+    border: none; 
+    background: green; 
+    color: white; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+button:disabled { 
+    background: gray; 
+    cursor: not-allowed; 
+}
+
+.top-left-btns {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.top-right-btns{
+    position: fixed; 
+    top: 10px; 
+    right: 10px;
+}
+
+#backBtn, #historyBtn {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}

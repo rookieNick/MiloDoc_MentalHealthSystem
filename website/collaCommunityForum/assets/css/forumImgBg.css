@@ -1,0 +1,29 @@
+/* In forumImg.css */
+.main-content header {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    position: relative;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.main-content header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Optional: adds a subtle overlay for better text readability */
+    z-index: 1;
+}
+
+.main-content header h1,
+.main-content header p {
+    position: relative;
+    z-index: 2;
+}

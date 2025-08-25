@@ -1,0 +1,28 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore environment files
+.env
+
+# Ignore logs and cache
+*.log
+/cache/
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore dependencies (e.g., Node.js, Python)
+node_modules/
+venv/
+
+
+
+__pycache__/
+
+*/__pycache__/
+
+*.pyc
+
+*.sql

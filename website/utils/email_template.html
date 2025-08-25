@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Suicidal Intention Alert</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+    <div style="max-width: 600px; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #ff4d4d;">🚨 Urgent: Suicidal Intention Detected</h2>
+        <p style="color: #333; font-size: 16px;">Dear Parent/Guardian,</p>
+        <p style="color: #555; font-size: 14px;">We have detected concerning messages in your child's conversation with the MiloDoc chatbot. Please review the chat below and reach out to them as soon as possible.</p>
+        
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 10px;">
+            {{CHAT_MESSAGES}}
+        </div>
+
+        <p style="color: #ff4d4d; font-size: 14px; font-weight: bold; margin-top: 15px;">
+            ⚠️ If your child is in immediate danger, please seek professional help or contact emergency services.
+        </p>
+
+        <p style="color: #333; font-size: 14px; margin-top: 20px;">Best regards,<br><strong>MiloDoc Team</strong></p>
+    </div>
+</body>
+</html>

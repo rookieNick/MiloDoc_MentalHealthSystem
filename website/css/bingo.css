@@ -1,0 +1,232 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f4f7fa;
+    color: #333;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .bingo-board {
+    flex: 7;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    height: 100%;
+  }
+  
+  .mission-box {
+    position: relative;
+    background: #e0ecff;
+    border: 2px solid #a0c4ff;
+    border-radius: 12px;
+    padding: 15px;
+    transition: transform 0.2s ease;
+  }
+  
+  .mission-box:hover {
+    transform: scale(1.03);
+  }
+  
+  .mission-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .mission-desc {
+    font-size: 14px;
+  }
+  
+  .claim-btn {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 10px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: not-allowed;
+    pointer-events: none; /* disables clicking */
+  }
+  .mission-target {
+    font-size: 13px;
+    color: #555;
+    margin-top: 5px;
+  }
+  .mission-box.completed .claim-btn {
+    display: block;
+  }
+  
+  .progress-section {
+    flex: 3;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .back-btn {
+    margin-bottom: 10px;
+    background: #ccc;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #2196f3;
+    transition: width 0.3s ease;
+  }
+  
+  .claim-bonus {
+    background: #ff9800;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .claim-bonus:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .reset-note {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  
+  /* Hover and active styles */
+  .claim-bonus:hover,
+  .back-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+  
+  .claim-bonus:active,
+  .back-btn:active {
+    transform: scale(0.98);
+  }
+  
+  
+  /* Claimed Bonus */
+  .claim-bonus.claimed {
+    background: #9e9e9e;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .claim-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  
+  /* Progress info */
+  .progress-info {
+    margin-top: 10px;
+  }
+  
+  #progressText {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  
+  .stage-rewards {
+    font-size: 14px;
+    color: #555;
+    margin-top: 6px;
+    text-align: center;
+  }
+  
+  .reward-labels {
+    position: relative;
+    height: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .reward-labels span {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .progress-bar {
+    flex: 1;
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .progress-percent {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+  }
+  
+  .alert-fixed-top {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* higher than most elements */
+    width: auto;
+    max-width: 90%;
+  }

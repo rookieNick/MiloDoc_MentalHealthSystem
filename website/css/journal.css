@@ -1,0 +1,66 @@
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+* {
+    box-sizing: border-box;
+}
+
+#calendar {
+    width: 90%;              /* Full width of the parent container */
+    margin: 0px auto;        /* Centered with a 40px top/bottom margin */
+}
+
+.fc-event {
+    white-space: normal;      /* Allow text to wrap */
+    overflow: visible;        /* Show full content without clipping */
+
+    padding: 5px;
+    border-radius: 5px;
+
+    /* Add transition to ensure smooth return */
+    transition: all 0.5s ease;
+}
+
+
+.fc-event-time {
+    white-space: normal;  /* Allows wrapping of text */
+    overflow: visible;    /* Prevents clipping of long text */
+    text-overflow: clip;  /* Disables ellipsis */
+}
+
+
+
+.fc-event-title {
+    white-space: normal;  /* Allow multi-line wrapping */
+
+    text-overflow: ellipsis;
+    display: block;
+    height:7em;
+    line-height: 1.2em; /* Line spacing */
+}
+
+
+
+
+
+/* Event Hover Effect */
+.event-hover {
+    white-space: normal !important;
+    z-index: 100;  /* Ensure it appears above other events */
+
+    background-color: rgb(91, 145, 255);
+    color: lightblue;
+    /* Smooth transition */
+
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+    
+    cursor: pointer;
+}
+
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    min-height: 5em;
+}

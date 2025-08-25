@@ -1,0 +1,105 @@
+.dashboard {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.card-header {
+  color: rgb(61, 61, 255);
+  background-color: rgb(228, 239, 255);
+}
+
+/* Dashboard container */
+.dashboard-above {
+  width: 90%;
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 2em auto;
+}
+
+/* Card Styling */
+.dashboard-above .card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  width: 250px;
+  height: 100px;
+  position: relative;
+}
+
+.dashboard-above .card {
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-above .card:hover {
+  transform: translateY(-5px);
+}
+
+.dashboard-above .card-content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  height: 100%; /* Ensure it takes the full height of the card */
+}
+
+
+/* Card Content */
+.dashboard-above .card-content p {
+  font-size: 12px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.dashboard-above .card-content h2 {
+  /* margin: 5px 0 0; */
+  /* position: relative;
+  bottom: 0px; */
+  margin: 10px 0 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.dashboard-above .card-content .overall-score-date {
+  /* margin: 5px 0 0; */
+  position: relative;
+  bottom: 0px;
+  color: rgba(54, 54, 54, 0.645);
+  font-weight: bold;
+  text-align: right;
+  font-size: 0.8em;
+
+  margin-top: auto; /* Pushes it to the bottom */
+  color: rgba(54, 54, 54, 0.645);
+  font-weight: bold;
+}
+
+
+
+
+.overall-score-value {
+  font-size: 0.8em;
+  color: rgb(128, 128, 128);
+  /* float: right; */
+}
+
+#mentalstatusText{
+  font-size: 0.9em;
+  color: rgb(40, 40, 40);
+}
+
+/* Color Themes */
+.blue { border-bottom: 5px solid #007bff; }
+.blue .progress-circle { border-color: #007bff; color: #007bff; }
+
+.red { border-bottom: 5px solid #dc3545; }
+.red .progress-circle { border-color: #dc3545; color: #dc3545; }
+
+.orange { border-bottom: 5px solid #fd7e14; }
+.orange .progress-circle { border-color: #fd7e14; color: #fd7e14; }
+
+.green { border-bottom: 5px solid #28a745; }
+.green .progress-circle { border-color: #28a745; color: #28a745; }

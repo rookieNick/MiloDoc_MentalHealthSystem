@@ -1,0 +1,11 @@
+admin email: admin@mdoc.com
+admin pw: Beh@030118
+
+patient email: behbeh@gmail.com
+patient pw: Beh@030118
+
+patient email: goh@gmail.com
+patient pw: Beh@030118
+
+doctor email: doctorlim0000@gmail.com
+doctor pw: Beh@030118

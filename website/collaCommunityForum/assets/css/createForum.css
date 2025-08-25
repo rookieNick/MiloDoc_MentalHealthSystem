@@ -1,0 +1,229 @@
+ /* Basic Reset */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 20px;
+    /* Add padding to top of page */
+}
+
+.container {
+    max-width: 650px;
+    /* Reduced from 800px */
+    margin: 20px auto;
+    /* Reduced top margin from 40px */
+    padding: 20px;
+    /* Reduced padding */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Reduced margin */
+    color: #2c3e50;
+    font-size: 24px;
+    /* Smaller font size */
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: #3498db;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Reduced gap */
+}
+
+label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 3px;
+    /* Reduced margin */
+    display: block;
+    font-size: 14px;
+    /* Smaller font size */
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    /* Reduced padding */
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    font-size: 14px;
+    /* Smaller font size */
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    /* Reduced height */
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%232c3e50' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+    padding-right: 35px;
+}
+
+button {
+    padding: 10px 15px;
+    /* Reduced padding */
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    /* Smaller font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 5px;
+    /* Added top margin */
+}
+
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+button[type="button"] {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background-color: #c0392b;
+}
+
+/* Button layout for side-by-side */
+form>div.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+form>div.button-group button {
+    flex: 1;
+}
+
+/* Image upload styling */
+.image-upload {
+    margin-top: 5px;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    /* Reduced padding */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#drop-area:hover {
+    border-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+#drop-area p {
+    margin-bottom: 10px;
+    /* Reduced margin */
+    color: #7f8c8d;
+    font-size: 14px;
+    /* Smaller font size */
+}
+
+#select-file {
+    color: #3498db;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.community-img {
+    max-width: 100%;
+    max-height: 200px;
+    /* Reduced height */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Animation for form elements - more subtle */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+form>* {
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Add a top title to ensure there's content visible */
+.page-title {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #2c3e50;
+    font-size: 18px;
+    font-weight: normal;
+}

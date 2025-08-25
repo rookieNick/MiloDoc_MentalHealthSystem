@@ -1,0 +1,551 @@
+/* Base Styles */
+:root {
+    --primary-color: #2b6cb0;
+    --secondary-color: #4299e1;
+    --accent-color: #ebf4ff;
+    --success-color: #38a169;
+    --warning-color: #ecc94b;
+    --danger-color: #e53e3e;
+    --dark-color: #2d3748;
+    --light-color: #f7fafc;
+    --gray-color: #a0aec0;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --primarycolor: #0A76D8; /* Added from main.css */
+    --primarycolorhover: #006dd3; /* Added from main.css */
+    --btnice: #D8EBFA; /* Added from main.css */
+    --btnnicetext: #1b62b3; /* Added from main.css */
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+    display: flex; /* Add flexbox to layout */
+}
+
+/* Admin Menu Styles */
+.menu {
+    width: 260px;
+    background-color: white;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.menu-container {
+    width: 100%;
+}
+
+.profile-container {
+    width: 100%;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.profile-subtitle {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    margin-top: 0;
+}
+
+.menu-row {
+    width: 100%;
+}
+
+/* Keep existing menu styles from main.css */
+.menu-btn {
+    padding: 6px;
+    color: #3b3b3b;
+    background-position: 30% 50%;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+}
+
+.menu-text {
+    padding-left: 40%;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.menu-active {
+    color: var(--primarycolor);
+    border-right: 7px solid var(--primarycolor);
+}
+
+.menu-btn:hover {
+    background-color: var(--btnice);
+    color: var(--primarycolor);
+}
+
+.non-style-link-menu:link, .non-style-link-menu:visited, .non-style-link-menu:active {
+    text-decoration: none;
+    color: #3b3b3b;
+}
+
+.non-style-link-menu:hover {
+    text-decoration: none;
+    color: var(--primarycolor);
+}
+
+.non-style-link-menu-active:link, .non-style-link-menu-active:visited, .non-style-link-menu-active:active {
+    text-decoration: none;
+    color: var(--primarycolor);
+}
+
+.logout-btn {
+    width: 100%;
+    margin: 5px 0;
+}
+
+/* Main Content Container */
+.page-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.container {
+    max-width: calc(100% - 40px); /* Change from fixed 1200px to use almost full width */
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 321px; /* Same as menu width to prevent overlap */
+    width: calc(100% - 260px); /* Adjust width for menu */
+}
+
+.menu{
+    width: 321px;
+    scrollbar-width: none;
+}
+
+.profile-subtitle {
+    font-size: 15px;
+    color: var(--gray-color);
+    margin-top: 0;
+}
+
+p.menu-text {
+    padding-left: 40%;
+    font-weight: 500;
+    font-size: 16px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    margin: 12px;
+}
+
+.profile-container {
+    border-bottom: 1.5px solid rgb(235, 235, 235);
+    /* border-radius: 6px; */
+    padding-top: 18%;
+    padding-bottom: 16%;
+    /* box-shadow: 0 0 3px rgba(52, 58, 64, 0.08); */
+    text-align: center;
+}
+
+p.profile-title {
+    font-size: 22px;
+    margin: 0px;
+}
+
+.logout-btn{
+    margin-top: 30px;
+    width: 85%;
+}
+
+/* Header */
+header {
+    margin-bottom: 25px;
+    text-align: center;
+    padding: 15px 0;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.report-date {
+    color: var(--gray-color);
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+/* Section Styling */
+.report-section {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 25px;
+    padding: 18px;
+    transition: var(--transition);
+}
+
+.report-section h2 {
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 8px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
+.report-section h2::after {
+    content: '▼';
+    margin-left: auto;
+    font-size: 0.8em;
+    transition: var(--transition);
+}
+
+.report-section.collapsed h2::after {
+    transform: rotate(-90deg);
+}
+
+.report-section.collapsed .charts,
+.report-section.collapsed .table-container {
+    display: none;
+}
+
+.section-info {
+    color: var(--gray-color);
+    font-style: italic;
+    margin-top: -12px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin: 0 0 12px;
+    color: var(--dark-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 700;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-color);
+}
+
+.card:nth-child(2)::before {
+    background: var(--secondary-color);
+}
+
+.card:nth-child(3)::before {
+    background: var(--warning-color);
+}
+
+.card:nth-child(4)::before {
+    background: var(--success-color);
+}
+
+/* Charts */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.growth-charts {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.chart-container {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+    height: 300px; /* Fixed height for charts */
+}
+
+.chart-container h3 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    color: var(--dark-color);
+    text-align: center;
+    font-weight: 600;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 200px !important; /* Control chart height */
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.data-table th {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.data-table tr:hover {
+    background-color: #f8fafc;
+}
+
+.empty-table {
+    text-align: center;
+    color: var(--gray-color);
+    padding: 25px !important;
+    font-style: italic;
+}
+
+/* Action Buttons */
+.action-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-right: 5px;
+    transition: var(--transition);
+}
+
+.view-btn {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.view-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.notify-btn {
+    background-color: var(--warning-color);
+    color: #744210;
+}
+
+.notify-btn:hover {
+    background-color: #d69e2e;
+    color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    color: var(--gray-color);
+    font-size: 0.85rem;
+    margin-left: 260px; /* Same as menu width */
+    width: calc(100% - 260px); /* Adjust width for menu */
+}
+
+/* Button Styles from main.css */
+.btn {
+    cursor: pointer;
+    padding: 8px 20px;
+    outline: none;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn:hover {
+    background-color: var(--primarycolorhover);
+    box-shadow: none;
+    transition: all 0.5s;
+}
+
+.btn-primary {
+    background-color: var(--primarycolor);
+    border: 1px solid var(--primarycolor);
+    color: #fff;
+    box-shadow: 0 3px 5px 0 rgba(57,108,240,0.3);
+}
+
+.btn-primary-soft {
+    background-color: #D8EBFA;
+    color: #1969AA;
+    font-weight: 500;
+    font-size: 16px;
+    border: none;
+}
+
+.btn-primary-soft:hover {
+    background-color: var(--primarycolor);
+    color: #fff;
+    box-shadow: 0 3px 5px 0 rgba(57,108,240,0.3);
+}
+
+/* Menu icon styles imported from main.css */
+.menu-icon-dashbord, .menu-icon-doctor, .menu-icon-schedule, 
+.menu-icon-appoinment, .menu-icon-patient, .menu-icon-forums, 
+.menu-icon-settings, .menu-icon-games, .menu-icon-quiz, 
+.menu-icon-session, .menu-icon-home, .menu-icon-mood, 
+.menu-icon-history, .menu-icon-test, .menu-icon-desc, 
+.menu-icon-chatbot, .menu-icon-journal {
+    background-size: 25px 25px;
+    background-position: 15% 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .growth-charts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .container, footer {
+        margin-left: 260px;
+        width: calc(100% - 260px);
+    }
+    .growth-charts {
+        grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns at this breakpoint */
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        width: 200px;
+    }
+    
+    .container, footer {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+    
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .charts, .growth-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card p {
+        font-size: 1.6rem;
+    }
+    
+    .chart-container {
+        height: 280px;
+    }
+    
+    canvas {
+        max-height: 230px !important;
+    }
+    
+    .menu-text {
+        padding-left: 35%;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .menu {
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .container, footer {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .report-section {
+        padding: 12px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+}

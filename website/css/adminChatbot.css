@@ -1,0 +1,110 @@
+.bottom-container {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+
+
+    padding: 40px;
+
+}
+
+.upload-box {
+    background-color: #ffffff11;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    width: 100%;
+}
+
+.upload-heading {
+    text-align: center;
+    color: #111827;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.upload-input {
+    padding: 10px;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    background-color: #f3f4f6;
+    cursor: pointer;
+}
+
+.upload-button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #4338ca;
+}
+
+.progress-wrapper {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.progress-label {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.progress-bar-outer {
+    width: 100%;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 24px;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    width: 0%;
+    background: #28a745;
+    transition: width 0.5s ease;
+}
+
+
+.pdf-section {
+    margin-top: 30px;
+}
+
+.pdf-title {
+    font-size: 18px;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.pdf-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pdf-item {
+    padding: 8px 12px;
+    background-color: #f3f4f6;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pdf-item::before {
+    content: "📄";
+}
